@@ -8,17 +8,15 @@ import re
 
 
 
-
 start_time = time.time()
 print start_time
 print
 
-def p():
+def p():#Debugging function
     line = str(sys.exc_traceback.tb_lineno)
     print "----------------------------------------Error at: " + line
 
-def getNamesListInDivs():
-    #http://new.bangbros.com/most-liked-girls/77  --- 1-77
+def getNamesListInDivs():#Gets list item from website, but list is across 5 pages on site, for each list item it adds it to html list
     x = 1
     while x <= 5:
         try:
@@ -34,8 +32,8 @@ def getNamesListInDivs():
             p()
             pass
         x = x + 1
-
-def createBookmarks(): #turns list of names into chrome bookmarks
+therd  jdkhf 
+def createBookmarks(): #turns html list of names into chrome bookmarks
     url = urllib2.urlopen("file:///C:/Users/CPU/Desktop/pythonWebScraping/namesListInDiv.html").read()  #put your file location in
     soup = BeautifulSoup(url)
     print '''----start----
