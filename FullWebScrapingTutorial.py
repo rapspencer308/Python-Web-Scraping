@@ -18,21 +18,27 @@ def p():#Debugging function
 
 def getNamesListInDivs():#Gets list item from website, but list is across 5 pages on site, for each list item it adds it to html list
     x = 1
-    while x <= 5:
-        try:
+    while x <= 5:#going though 5 pages. Loops this 5 times
+        try:#it will try the script below
+
             url = "http://www.therichest.com/top-lists/top-250-richest-people-in-the-world/page/"+str(x)
             a = requests.get(url)
             soup = BeautifulSoup(a.content)
-            container = soup.findAll("tbody")
-            for shit in container:
-                thumbs = shit.findAll("td", {"class": "name"})
-                for shit2 in thumbs:
-                    print "<div>" + shit2.text + "</div>"
-        except:
+            container = soup.findAll("tbody")#there is only 1 tbody so I dont have to be specify the tag's attribute value like a class name.
+
+            for shit in container:#for each of the table rows in the table body
+
+                thumbs = shit.findAll("td", {"class": "name"})#find the element with the Billionaire's name
+
+                for shit2 in thumbs:#for shit in the element
+
+                    print "<div>" + shit2.text + "</div>"#print the text of the element
+
+        except:#if there was and error with the script it will call the debugging function.
             p()
-            pass
+            pass#then go on to the next loop
         x = x + 1
-therd  jdkhf 
+
 def createBookmarks(): #turns html list of names into chrome bookmarks
     url = urllib2.urlopen("file:///C:/Users/CPU/Desktop/pythonWebScraping/namesListInDiv.html").read()  #put your file location in
     soup = BeautifulSoup(url)
@@ -53,11 +59,10 @@ def createBookmarks(): #turns html list of names into chrome bookmarks
     '''
     g_data = soup.findAll("div")
     x = 1
-    for shit in g_data:
+    for shit in g_data:#for each list item
         name = shit.contents[0]
-        name2 = (shit.text).replace(" ", "+")
+        name2 = (shit.text).replace(" ", "+")#replace the space in the name to create the link url
         a = "http://www.pornhub.com/video/search?search=" + name2 #http://www.pornhub.com/video/search?search=firstName+lastName
-        #print name2
         link = a
         open = '<DT><A HREF="'
         end = '" ADD_DATE="1470292609">' + name + ' - ' + str(x) + '</A>'
@@ -104,9 +109,9 @@ def namesListToGettingData():
             pass
 
 
-#Functions: uncomment one and run one at a time. 
+#Functions: uncomment one and run one at a time.
 
-#getNamesListInDivs()
+getNamesListInDivs()
 #createBookmarks()
 #namesListToGettingData()
 
